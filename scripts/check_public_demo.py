@@ -22,13 +22,16 @@ for entry in at.text_input:
 assert not at.exception,at.exception
 assert next(m.value for m in at.metric if m.label=='Potential sales recovered')=='INR 712,500'
 assert next(m.value for m in at.metric if m.label=='Potential net margin improvement')=='INR 397,950'
-[b for b in at.button if b.label=='Prepare Excel'][-1].click().run()
+export_button=[b for b in at.button if b.label=='Prepare Excel'][-1]
+export_key='xlsx_'+export_button.key.removeprefix('prepare_')
+export_button.click().run()
 assert not at.exception,at.exception
 from io import BytesIO
 from openpyxl import load_workbook
-exports=[v for k,v in at.session_state.filtered_state.items() if k.startswith('xlsx_la_value_')]
+exports=[at.session_state[export_key]]
 assert exports
 book=load_workbook(BytesIO(exports[0]),data_only=True)
 assert book['Evidence'].max_row==3
 assert bt.session_state['_la_demo_state']['history']==[]
 print('Revalidation and commercial Excel readback PASS; second visitor remains unchanged.')
+

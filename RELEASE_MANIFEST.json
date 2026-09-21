@@ -586,7 +586,7 @@
     },
     {
       "path": "scripts/check_public_demo.py",
-      "sha256": "2b26bd4444781adf0570f641f9df5f3a1d7f9fa9c69731f6c36db64cadbe3dbe"
+      "sha256": "d79957b2c8d83bc358299d3ea25c27dbaacce0dd9bf21a8c094f95156a5a1949"
     },
     {
       "path": "scripts/generate_demo.py",
