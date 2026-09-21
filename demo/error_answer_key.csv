@@ -1,0 +1,151 @@
+file,record,csv_row,field,deliberate_value,corrected_value
+vendor.csv,1,2,tax_id,,DEMO-NOT-VALID-TAX-0001
+vendor.csv,2,3,tax_id,,DEMO-NOT-VALID-TAX-0002
+vendor.csv,3,4,tax_id,,DEMO-NOT-VALID-TAX-0003
+vendor.csv,4,5,tax_id,,DEMO-NOT-VALID-TAX-0004
+vendor.csv,5,6,tax_id,,DEMO-NOT-VALID-TAX-0005
+vendor.csv,6,7,tax_id,,DEMO-NOT-VALID-TAX-0006
+vendor.csv,7,8,tax_id,,DEMO-NOT-VALID-TAX-0007
+vendor.csv,8,9,tax_id,,DEMO-NOT-VALID-TAX-0008
+vendor.csv,9,10,tax_id,,DEMO-NOT-VALID-TAX-0009
+vendor.csv,10,11,tax_id,,DEMO-NOT-VALID-TAX-0010
+vendor.csv,11,12,tax_id,,DEMO-NOT-VALID-TAX-0011
+vendor.csv,12,13,tax_id,,DEMO-NOT-VALID-TAX-0012
+vendor.csv,13,14,tax_id,,DEMO-NOT-VALID-TAX-0013
+vendor.csv,14,15,tax_id,,DEMO-NOT-VALID-TAX-0014
+vendor.csv,15,16,tax_id,,DEMO-NOT-VALID-TAX-0015
+vendor.csv,16,17,contact_email,invalid-email,demo16@example.com
+vendor.csv,17,18,contact_email,invalid-email,demo17@example.com
+vendor.csv,18,19,contact_email,invalid-email,demo18@example.com
+vendor.csv,19,20,contact_email,invalid-email,demo19@example.com
+vendor.csv,20,21,contact_email,invalid-email,demo20@example.com
+vendor.csv,21,22,contact_email,invalid-email,demo21@example.com
+vendor.csv,22,23,contact_email,invalid-email,demo22@example.com
+vendor.csv,23,24,contact_email,invalid-email,demo23@example.com
+vendor.csv,24,25,contact_email,invalid-email,demo24@example.com
+vendor.csv,25,26,contact_email,invalid-email,demo25@example.com
+vendor.csv,26,27,contact_email,invalid-email,demo26@example.com
+vendor.csv,27,28,contact_email,invalid-email,demo27@example.com
+vendor.csv,28,29,contact_email,invalid-email,demo28@example.com
+vendor.csv,29,30,contact_email,invalid-email,demo29@example.com
+vendor.csv,30,31,contact_email,invalid-email,demo30@example.com
+catalog.csv,31,32,size,,M
+catalog.csv,32,33,size,,M
+catalog.csv,33,34,size,,M
+catalog.csv,34,35,size,,M
+catalog.csv,35,36,size,,M
+catalog.csv,36,37,size,,M
+catalog.csv,37,38,size,,M
+catalog.csv,38,39,size,,M
+catalog.csv,39,40,size,,M
+catalog.csv,40,41,size,,M
+catalog.csv,41,42,size,,M
+catalog.csv,42,43,size,,M
+catalog.csv,43,44,size,,M
+catalog.csv,44,45,size,,M
+catalog.csv,45,46,size,,M
+catalog.csv,46,47,material,,Cotton
+catalog.csv,47,48,material,,Cotton
+catalog.csv,48,49,material,,Cotton
+catalog.csv,49,50,material,,Cotton
+catalog.csv,50,51,material,,Cotton
+catalog.csv,51,52,material,,Cotton
+catalog.csv,52,53,material,,Cotton
+catalog.csv,53,54,material,,Cotton
+catalog.csv,54,55,material,,Cotton
+catalog.csv,55,56,material,,Cotton
+catalog.csv,56,57,material,,Cotton
+catalog.csv,57,58,material,,Cotton
+catalog.csv,58,59,material,,Cotton
+catalog.csv,59,60,material,,Cotton
+catalog.csv,60,61,material,,Cotton
+catalog.csv,61,62,image_url,,https://example.com/demo/SKU-DEMO-0061.jpg
+catalog.csv,62,63,image_url,,https://example.com/demo/SKU-DEMO-0062.jpg
+catalog.csv,63,64,image_url,,https://example.com/demo/SKU-DEMO-0063.jpg
+catalog.csv,64,65,image_url,,https://example.com/demo/SKU-DEMO-0064.jpg
+catalog.csv,65,66,image_url,,https://example.com/demo/SKU-DEMO-0065.jpg
+catalog.csv,66,67,image_url,,https://example.com/demo/SKU-DEMO-0066.jpg
+catalog.csv,67,68,image_url,,https://example.com/demo/SKU-DEMO-0067.jpg
+catalog.csv,68,69,image_url,,https://example.com/demo/SKU-DEMO-0068.jpg
+catalog.csv,69,70,image_url,,https://example.com/demo/SKU-DEMO-0069.jpg
+catalog.csv,70,71,image_url,,https://example.com/demo/SKU-DEMO-0070.jpg
+catalog.csv,71,72,image_url,,https://example.com/demo/SKU-DEMO-0071.jpg
+catalog.csv,72,73,image_url,,https://example.com/demo/SKU-DEMO-0072.jpg
+catalog.csv,73,74,image_url,,https://example.com/demo/SKU-DEMO-0073.jpg
+catalog.csv,74,75,image_url,,https://example.com/demo/SKU-DEMO-0074.jpg
+catalog.csv,75,76,image_url,,https://example.com/demo/SKU-DEMO-0075.jpg
+po.csv,76,77,Cancel Dates,2026-09-20,2026-11-10
+po.csv,77,78,Cancel Dates,2026-09-20,2026-11-10
+po.csv,78,79,Cancel Dates,2026-09-20,2026-11-10
+po.csv,79,80,Cancel Dates,2026-09-20,2026-11-10
+po.csv,80,81,Cancel Dates,2026-09-20,2026-11-10
+po.csv,81,82,Cancel Dates,2026-09-20,2026-11-10
+po.csv,82,83,Cancel Dates,2026-09-20,2026-11-10
+po.csv,83,84,Cancel Dates,2026-09-20,2026-11-10
+po.csv,84,85,Cancel Dates,2026-09-20,2026-11-10
+po.csv,85,86,Cancel Dates,2026-09-20,2026-11-10
+po.csv,86,87,Cancel Dates,2026-09-20,2026-11-10
+po.csv,87,88,Cancel Dates,2026-09-20,2026-11-10
+po.csv,88,89,Cancel Dates,2026-09-20,2026-11-10
+po.csv,89,90,Cancel Dates,2026-09-20,2026-11-10
+po.csv,90,91,Cancel Dates,2026-09-20,2026-11-10
+po.csv,91,92,currency,,INR
+po.csv,92,93,currency,,INR
+po.csv,93,94,currency,,INR
+po.csv,94,95,currency,,INR
+po.csv,95,96,currency,,INR
+po.csv,96,97,currency,,INR
+po.csv,97,98,currency,,INR
+po.csv,98,99,currency,,INR
+po.csv,99,100,currency,,INR
+po.csv,100,101,currency,,INR
+po.csv,101,102,currency,,INR
+po.csv,102,103,currency,,INR
+po.csv,103,104,currency,,INR
+po.csv,104,105,currency,,INR
+po.csv,105,106,currency,,INR
+po.csv,106,107,Cost,0,650
+po.csv,107,108,Cost,0,650
+po.csv,108,109,Cost,0,650
+po.csv,109,110,Cost,0,650
+po.csv,110,111,Cost,0,650
+po.csv,111,112,Cost,0,650
+po.csv,112,113,Cost,0,650
+po.csv,113,114,Cost,0,650
+po.csv,114,115,Cost,0,650
+po.csv,115,116,Cost,0,650
+po.csv,116,117,Cost,0,650
+po.csv,117,118,Cost,0,650
+po.csv,118,119,Cost,0,650
+po.csv,119,120,Cost,0,650
+po.csv,120,121,Cost,0,650
+po.csv,121,122,Total Quantity,0,60
+po.csv,122,123,Total Quantity,0,60
+po.csv,123,124,Total Quantity,0,60
+po.csv,124,125,Total Quantity,0,60
+po.csv,125,126,Total Quantity,0,60
+po.csv,126,127,Total Quantity,0,60
+po.csv,127,128,Total Quantity,0,60
+po.csv,128,129,Total Quantity,0,60
+po.csv,129,130,Total Quantity,0,60
+po.csv,130,131,Total Quantity,0,60
+po.csv,131,132,Total Quantity,0,60
+po.csv,132,133,Total Quantity,0,60
+po.csv,133,134,Total Quantity,0,60
+po.csv,134,135,Total Quantity,0,60
+po.csv,135,136,Total Quantity,0,60
+po.csv,136,137,Total Quantity,61,60
+po.csv,137,138,Total Quantity,61,60
+po.csv,138,139,Total Quantity,61,60
+po.csv,139,140,Total Quantity,61,60
+po.csv,140,141,Total Quantity,61,60
+po.csv,141,142,Total Quantity,61,60
+po.csv,142,143,Total Quantity,61,60
+po.csv,143,144,Total Quantity,61,60
+po.csv,144,145,Total Quantity,61,60
+po.csv,145,146,Total Quantity,61,60
+po.csv,146,147,Total Quantity,61,60
+po.csv,147,148,Total Quantity,61,60
+po.csv,148,149,Total Quantity,61,60
+po.csv,149,150,Total Quantity,61,60
+po.csv,150,151,Total Quantity,61,60
