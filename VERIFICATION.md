@@ -24,3 +24,11 @@ The release includes only newly generated synthetic CSVs. The original secrets, 
 - The demo uses browser-session state in public mode rather than the local shared demo database.
 - Simplified local launch selection was exercised for demo, uploaded batch and new batch paths.
 - Public hosting and remote CI remain unverified until authenticated publishing is complete.
+
+## Remote verification — 21 September 2026
+
+GitHub Actions on clean Linux / Python 3.12 passed all 339 tests (Retail 228, Onboarding 18, Catalog 30, PO 55, Excel 8), then passed the public-demo assessment, revalidation, Excel readback and visitor-isolation check. The first public-demo test run exposed a changed Streamlit testing API; the check now retrieves the export using its stable widget key.
+
+Verified run: https://github.com/Deepali007-Agent/launch-assurance-command-center/actions/runs/35589700988
+
+The source is public at https://github.com/Deepali007-Agent/launch-assurance-command-center . Streamlit deployment of this release still requires the owner's Cloud sign-in; the older hosted application is a separate build.
