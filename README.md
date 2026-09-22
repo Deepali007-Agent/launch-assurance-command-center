@@ -61,3 +61,13 @@ Next phase: authenticated roles, a deployed multi-user data service, approved ER
 ## Public portfolio entry point
 
 Deploy `streamlit_app.py` for a focused, session-isolated Launch Assurance demonstration. The public view runs the same included source validation engines and synthetic logistics scenario, without requiring four local servers. The standalone upload workbenches remain available locally. See [deployment instructions](DEPLOYMENT.md).
+
+## Uploaded logistics and evidence improvements
+
+For an uploaded batch in Retail Intelligence, expand **Upload shipment and inventory inputs**. Supply both CSVs using the header templates, set launch date/horizon and validate. `demo/logistics/` contains fictional inputs matching the 600-row source files. Use corrected valid commercial inputs before modeling; approval/setup gates still determine whether a SKU can proceed.
+
+Compare three alternatives by SKU, inspect the +20% demand stress case, and record accept/reject/defer/override with an owner, due date and justification. This records a decision only; it does not execute transport or bypass approvals. Source edits make prior choices stale.
+
+[Architecture and model contracts](ARCHITECTURE.md) · [Synthetic benchmark](benchmark/README.md) · [Formative study protocol](USABILITY_STUDY.md)
+
+Run `python scripts/benchmark_validation.py` to reproduce the source-record benchmark. Expected labels are authored synthetic cases pending independent business review; ownership and handoff performance are not implied by detection metrics. Run `python scripts/quality_checks.py` after installing `requirements-dev.txt` for linting, static compilation and per-app coverage reports.

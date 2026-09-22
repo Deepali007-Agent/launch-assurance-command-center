@@ -1,0 +1,67 @@
+{
+  "basis": "Synthetic authored cases; expectations require independent business review. Record-level metrics, not per-finding metrics. Negative cases are the remaining generated records. This is regression evidence, not real-world detection accuracy. Ownership and handoff correctness require the separate workflow suite; they are not inferred from source severity.",
+  "dataset_hashes": {
+    "demo/corrected/catalog.csv": "2a1553845d7c1018d97821b835bbef002c63f334a87da77c4e4f1c2ffef999af",
+    "demo/corrected/po.csv": "991aa4d8ec2263f2d42cc41c43c62b2e83eada76233e4e74c7f0219d1ee51991",
+    "demo/corrected/vendor.csv": "111b38938df1c92d46aa1f1a66c8e4d17c7d08f11357b24dbe37d86a83dced3d",
+    "demo/with_errors/catalog.csv": "bd3e209bf5ec9e4a72bf5991ca87e5607785bdd44bd8e29cce3fc6105850d1ef",
+    "demo/with_errors/po.csv": "07ae2bd31e03e7f3cdb9af1c8242556c1f881609f410b3267401032576f25a87",
+    "demo/with_errors/vendor.csv": "05695b7d7fa0baaadcce265c770bdcac8afa665a61344bc711777ab0ab011f04"
+  },
+  "results": [
+    {
+      "domain": "vendor",
+      "records": 600,
+      "inserted_error_records": 30,
+      "true_positive": 30,
+      "false_positive": 0,
+      "false_negative": 0,
+      "true_negative": 570,
+      "precision": 1.0,
+      "recall": 1.0,
+      "false_positive_rate": 0.0,
+      "f1": 1.0,
+      "critical_recall": 1.0,
+      "severity_correct": 30,
+      "corrections_cleared": 30,
+      "corrected_unexpected_findings": 0,
+      "seconds_dirty_and_corrected": 0.055
+    },
+    {
+      "domain": "catalog",
+      "records": 600,
+      "inserted_error_records": 45,
+      "true_positive": 45,
+      "false_positive": 0,
+      "false_negative": 0,
+      "true_negative": 555,
+      "precision": 1.0,
+      "recall": 1.0,
+      "false_positive_rate": 0.0,
+      "f1": 1.0,
+      "critical_recall": 1.0,
+      "severity_correct": 45,
+      "corrections_cleared": 45,
+      "corrected_unexpected_findings": 0,
+      "seconds_dirty_and_corrected": 9.898
+    },
+    {
+      "domain": "po",
+      "records": 600,
+      "inserted_error_records": 75,
+      "true_positive": 75,
+      "false_positive": 0,
+      "false_negative": 0,
+      "true_negative": 525,
+      "precision": 1.0,
+      "recall": 1.0,
+      "false_positive_rate": 0.0,
+      "f1": 1.0,
+      "critical_recall": 1.0,
+      "severity_correct": 75,
+      "corrections_cleared": 75,
+      "corrected_unexpected_findings": 0,
+      "seconds_dirty_and_corrected": 0.192
+    }
+  ]
+}

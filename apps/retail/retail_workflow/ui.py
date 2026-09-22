@@ -244,13 +244,21 @@ def workspace(selected_batch=None):
     st.caption('Onboarding → Catalog → Buying. One batch, versioned records, accountable handoffs. Earlier saved launch assessments are available in History.')
     launch,action,evid,rev=st.tabs(['Launch decision','Actions','Evidence','Review & audit'])
     with launch:
-        summary(store,batch)
         if batch:
-            pos=[r for r in store.board(batch) if r['kind']=='po']
-            if not pos:st.info('No PO requests yet. Complete Onboarding, receive the items in Catalog, and upload the buying request in PO Intelligence.')
+            name=next((r['name'] for r in store.batches() if r['id']==batch),batch)
+            st.subheader(name,help='The named uploaded batch assessed by all three workbenches.')
+            board=store.board(batch);pos=[r for r in board if r['kind']=='po']
+            if not pos:st.info('No PO requests yet. Complete Onboarding, receive items in Catalog, then upload the buying request.')
             else:
-                eligible=sum(r['Execution eligible'] for r in pos)
-                st.info(f'{eligible:,}/{len(pos):,} PO line requests satisfy the current execution gates. These are local simulation results, not a production release authorization.')
+                ready=sum(r['Execution eligible'] for r in pos)
+                st.write(f"**{ready:,} of {len(pos):,} PO line requests can proceed to simulated execution.** Human approval and setup gates remain binding.")
+                blockers=pd.DataFrame([{'Team':r['Next team'],'Next action':r['Next action'],'PO lines':1} for r in pos if not r['Execution eligible']])
+                if not blockers.empty:
+                    grouped=blockers.groupby(['Team','Next action'],as_index=False)['PO lines'].sum().sort_values('PO lines',ascending=False)
+                    st.dataframe(grouped.head(3),hide_index=True,width='stretch')
+                    st.caption('Top blocking requirements and accountable teams. Full assignments are in Actions.')
+            from launch_assurance.uploaded_ui import render as render_logistics
+            render_logistics(store,batch)
     with action:actions(store,batch,key='parent_actions',compact=True)
     with evid:
         if batch:

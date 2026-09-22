@@ -1,6 +1,6 @@
 # Launch Assurance Command Center
 
-One connected, synthetic launch demonstrating how retail teams can act before incomplete product data and fulfilment disruptions become lost demand. Open Retail Intelligence and use **Choose launch**. The **Demo** entry includes all five domains; **Uploaded data** entries use your shared batches. Earlier saved assessments are in **History**. Shipment/inventory feeds are not yet connected to uploaded batches.
+One connected, synthetic launch demonstrating how retail teams can act before incomplete product data and fulfilment disruptions become lost demand. Open Retail Intelligence and use **Choose launch**. The **Demo** entry includes all five domains; **Uploaded data** entries use your shared batches. Earlier saved assessments are in **History**. Uploaded batches now accept paired shipment/inventory CSVs and compare operational alternatives using current execution gates; see ARCHITECTURE.md.
 
 ## Eight-step demonstration
 
@@ -15,7 +15,7 @@ One connected, synthetic launch demonstrating how retail teams can act before in
 | 7. Ownership | The queue provides team-role defaults clearly marked as demo roles. Assign/reassign a named owner and due date; changes persist in a separate local demo audit. |
 | 8. Revalidation | Select simulated corrections/interventions, enter a simulation reviewer, and rerun source checks and the same daily stock ledger. Only corrected records become eligible. |
 
-The small scenario intentionally uses four SKUs to make every dependency inspectable. It does not replace the existing 600-row datasets or imply those datasets have shipment and inventory inputs.
+The small scenario intentionally uses four SKUs to make every dependency inspectable. It remains separate from the 600-row upload workflow. Matching fictional logistics inputs are now provided in demo/logistics/.
 
 ## Three-minute demo
 

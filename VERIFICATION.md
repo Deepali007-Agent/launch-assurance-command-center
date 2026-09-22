@@ -32,3 +32,14 @@ GitHub Actions on clean Linux / Python 3.12 passed all 339 tests (Retail 228, On
 Verified run: https://github.com/Deepali007-Agent/launch-assurance-command-center/actions/runs/35589700988
 
 The source is public at https://github.com/Deepali007-Agent/launch-assurance-command-center . Streamlit deployment of this release still requires the owner's Cloud sign-in; the older hosted application is a separate build.
+
+
+## 22 September improvements
+
+Local checks passed: 246 Retail tests (18 new uploaded-logistics cases), 30 Catalog tests, the public demo check and a new uploaded comparison UI check covering reviewer persistence and export preparation. A 600-SKU integration run used the actual connected ledger gates and produced 1,800 alternatives. Existing workflow checks also passed Finance gates, failed handoff retry, upstream invalidation and stale assignment rejection.
+
+Synthetic record-level benchmark: 30 Vendor, 45 Catalog and 75 PO error records detected with expected severity; all corrected records cleared, with no unexpected findings in generated negatives. This is authored regression evidence pending independent business review, not real-world accuracy or measured savings. Timing covers both dirty and corrected source-engine evaluation and excludes UI, ingestion and approval operations.
+
+Local branch-inclusive coverage of launch_assurance and retail_workflow was 49% overall: 91% for the new uploaded model, 87% for the shared ledger and 96% for the original scenario engine. These are scoped measurements; UI checks and child source-engine processes were not collected into that run. CI now publishes per-app coverage rather than implying test counts mean full coverage.
+
+Added fatal-error linting, compile checks, pinned direct dependencies, redacted structured logistics event logging, architecture/contracts and a formative study protocol. Lint found a missing import in the existing Catalog rework view; the import is corrected. No user study has run. Public hosting still requires owner sign-in; new batch logistics is available locally.

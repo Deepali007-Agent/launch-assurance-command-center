@@ -1,8 +1,7 @@
-streamlit>=1.59,<2
-pandas>=2.2,<4
-altair>=5,<7
-openpyxl>=3.1,<4
-xlrd>=2,<3
-SQLAlchemy>=2,<3
-pytest>=8,<10
-
+streamlit==1.59.2
+pandas==3.0.3
+altair==6.2.2
+openpyxl==3.1.5
+xlrd==2.0.2
+SQLAlchemy==2.0.51
+pytest==9.1.1

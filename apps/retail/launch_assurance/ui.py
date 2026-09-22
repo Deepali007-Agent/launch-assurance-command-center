@@ -76,6 +76,9 @@ def render(show_title=True):
     metric(columns[2],'Potential sales recovered',f"INR {impact['protected_revenue']:,.0f}",'Incremental fulfilled units × retail price versus unchanged baseline; potential, not realized revenue.')
     metric(columns[3],'Potential net margin improvement',f"INR {impact['protected_margin']:,.0f}",'Incremental gross margin less expedite and transfer costs; excludes tax, returns and other operating costs.')
     if not after:st.caption('Impact above is the recommended logistics plan for initially eligible SKUs. Simulate corrections and revalidate to calculate the combined impact.')
+    blockers=[a for a in plan['actions'] if a['kind'] in ('setup','content','margin')]
+    if blockers:
+        st.write('**Blocking the remaining SKUs:** '+ ' · '.join(a['sku']+' — '+a['team']+': '+a['action'] for a in blockers))
     tabs=st.tabs(['Launch plan','Actions & revalidation','Agent evidence'])
     with tabs[0]:
         if plan['clear'] and plan['held']:st.warning(f"Recommend PARTIAL RELEASE: {', '.join(plan['clear'])}. Hold {', '.join(plan['held'])}.")

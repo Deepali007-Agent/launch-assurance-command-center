@@ -23,3 +23,9 @@ node_modules/
 .DS_Store
 Thumbs.db
 
+
+.coverage*
+!.coveragerc
+quality/
+
+benchmark/coverage.json

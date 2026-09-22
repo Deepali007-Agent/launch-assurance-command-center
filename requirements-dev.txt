@@ -1,0 +1,4 @@
+-r requirements.txt
+pytest-cov==7.0.0
+coverage==7.10.6
+ruff==0.13.2

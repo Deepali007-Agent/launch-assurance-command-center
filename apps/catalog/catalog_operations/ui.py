@@ -12,6 +12,7 @@ import json
 
 from .adapters import (
     get_catalog_actionable_summary,
+    get_catalog_rework_metrics,
     get_catalog_agent_assessments,
     get_catalog_bottleneck_summary,
     get_catalog_domain_events,
@@ -1282,3 +1283,4 @@ def render_app() -> None:
             ]
             st.dataframe(pd.DataFrame(dictionary, columns=["Field", "Requirement", "Definition"]), width="stretch", hide_index=True)
             st.caption("Synthetic data only · Human approval mandatory · ERP creation always simulated")
+

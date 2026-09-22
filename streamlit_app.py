@@ -18,3 +18,6 @@ with st.expander('About this prototype'):
     st.write('Built to demonstrate retail product operations: vendor and item setup, catalog content, buying controls, shipment delays and location-level inventory dependencies. Source validations use the included rule engines. Logistics and financial outcomes are deterministic simulations, not observed business results.')
     st.write('The downloadable source also contains the four local workbenches and 600-row synthetic datasets for end-to-end upload testing. This public view demonstrates the focused launch scenario; it does not connect to a live ERP or accept operational customer data.')
 
+
+from launch_assurance.evaluation_ui import render as render_benchmark
+render_benchmark()

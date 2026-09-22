@@ -114,10 +114,9 @@ with current:
         importlib.reload(assurance_ui).render(show_title=False)
     elif chosen=='new_upload':
         st.info('Start a named batch in Onboarding, upload Vendor and Item files, then select that batch here. Receive eligible items in Catalog and upload the PO file in Buying.')
-        st.caption('The full shipment and location-stock scenario currently uses demo inputs. Shipment and inventory uploads are not connected to uploaded batches yet.')
+        st.caption('After source validation, add shipment and inventory CSVs to the same batch to compare operational alternatives.')
     else:
         batch=chosen.split(':',1)[1]
-        st.info('Shipment and inventory inputs are not connected to this batch. This view reports onboarding, Catalog and PO readiness; it does not calculate the demo’s protected-revenue scenario.')
         workflow_ui.workspace(selected_batch=batch)
 with history:
     st.caption('Earlier saved launch assessments and their evidence. These are separate from the synthetic demonstration.')
@@ -126,3 +125,6 @@ with history:
 
 from orchestration.header_definitions import render_header_definitions
 render_header_definitions()
+
+from launch_assurance.evaluation_ui import render as render_benchmark
+render_benchmark()
