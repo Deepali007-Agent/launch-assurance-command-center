@@ -337,10 +337,11 @@ def _publish_results(svc, vendors, assessments):
 def render_app():
     st.set_page_config(page_title="Onboarding Intelligence",page_icon="◈",layout="wide"); _style(); apply_theme()
     from workflow_connection import workflow
+    importlib.reload(workflow)
     testing=st.toggle('Standalone testing mode',value=False,help='Test source rules in isolation; this mode does not hand records to the connected workflow.')
     if not testing:
-        from retail_workflow.stages import onboarding
-        onboarding(sys.modules[__name__]);return
+        from retail_workflow import stages
+        importlib.reload(stages).onboarding(sys.modules[__name__]);return
     st.warning('Standalone test portfolio: results here do not update shared workflow requests.')
     svc=_service()
     vendors,assessments,_=svc.snapshot()
@@ -349,7 +350,7 @@ def render_app():
     if st.session_state.get('onboarding_validation_notice'): st.success(st.session_state.pop('onboarding_validation_notice'))
     with st.expander('Upload or replace data', expanded=True):
         _upload_sources(svc, vendors, items)
-    tabs=st.tabs(["Executive Summary","Vendor Onboarding","Item Onboarding","Reconciliation & Dependencies","Actions & Recovery","Audit & Data"])
+    tabs=st.tabs(["Dashboard","Vendor Onboarding","Item Onboarding","Reconciliation & Dependencies","Actions & Recovery","Audit & Data"])
     with tabs[0]:
         _executive(c)
         _publish_results(svc, vendors, assessments)

@@ -99,14 +99,18 @@ import importlib
 from retail_workflow import store as workflow_store, ui as workflow_ui
 importlib.reload(workflow_store)
 importlib.reload(workflow_ui)
+from retail_workflow.auto_intake_ui import render as render_auto_intake
+with st.sidebar:
+    render_auto_intake()
 batches=workflow_store.WorkflowStore().batches()
 launch_names={row['id']:row['name'] for row in batches}
 options=['demo']+['uploaded:'+key for key in launch_names]+['new_upload']
 if st.session_state.get('launch_choice') not in options:
     st.session_state.pop('launch_choice',None)
-chosen=st.selectbox('Choose launch',options,key='launch_choice',
-    format_func=lambda key:'Demo · Festive Dress Launch' if key=='demo' else 'Uploaded data · Start a new batch' if key=='new_upload' else 'Uploaded data · '+launch_names[key.split(':',1)[1]],
-    help='Demo includes synthetic shipment and stock inputs. Uploaded batches use the source files validated in your standalone workbenches.')
+with st.sidebar:
+    chosen=st.selectbox('Choose launch',options,key='launch_choice',
+        format_func=lambda key:'Demo · Festive Dress Launch' if key=='demo' else 'Uploaded data · Start a new batch' if key=='new_upload' else 'Uploaded data · '+launch_names[key.split(':',1)[1]],
+        help='Demo includes synthetic shipment and stock inputs. Uploaded batches use the source files validated in your standalone workbenches.')
 current,history=st.tabs(['Launch','History'])
 with current:
     if chosen=='demo':

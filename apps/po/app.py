@@ -950,6 +950,13 @@ div[data-testid="stDataFrame"]{border:1px solid #2b3855;border-radius:10px;}
 @media(max-width:540px){.workflow-strip{grid-template-columns:1fr;}}
 </style>""", unsafe_allow_html=True)
 apply_theme()
+from workflow_connection import workflow
+connected_dashboard = not st.toggle('Standalone testing mode',value=False,key='po_dashboard_testing',help='Connected Dashboard reads the shared batch; standalone testing evaluates separate uploads.')
+if connected_dashboard:
+    import importlib
+    from retail_workflow import stages
+    importlib.reload(stages).buying()
+    st.stop()
 st.markdown('<div class="po-eyebrow">Retail Intelligence Platform · Specialist workbench</div>', unsafe_allow_html=True)
 st.title("PO / Buying Intelligence")
 st.link_button("Open retail decision workspace", __import__("os").environ.get("RETAIL_APP_URL", "http://localhost:8508"))
@@ -1268,7 +1275,7 @@ if st.session_state.get("po_analysis"):
             return "0"
 
     tab1, tab2, tab3, tab4 = st.tabs([
-        "Executive Summary",
+        "Dashboard",
         "Submission & SLA",
         "Vendor Intelligence",
         "Decision & Export"

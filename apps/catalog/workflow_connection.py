@@ -4,3 +4,6 @@ from pathlib import Path
 shared=Path(__file__).resolve().parents[1]/'retail'
 if str(shared) not in sys.path:sys.path.append(str(shared))
 from retail_workflow import ui as workflow
+
+import importlib
+workflow = importlib.reload(workflow)

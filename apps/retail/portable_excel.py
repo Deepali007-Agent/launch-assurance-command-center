@@ -19,10 +19,11 @@ def excel_bytes(sheets):
         records=list(records)
         columns=list(dict.fromkeys(key for row in records for key in row))
         sheet.append(columns or ['No records'])
-        for row in records:
+        for row_number,row in enumerate(records,start=2):
             sheet.append([json.dumps(row.get(key),default=str) if isinstance(row.get(key),(dict,list,tuple)) else row.get(key) for key in columns])
             # Uploaded text must remain literal text, never executable formulas.
-            for cell in sheet[sheet.max_row]:
+            for column_number in range(1,len(columns)+1):
+                cell=sheet.cell(row_number,column_number)
                 if isinstance(cell.value,str):cell.data_type='s'
         for cell in sheet[1]:
             cell.data_type='s';cell.font=Font(bold=True,color='FFFFFF')

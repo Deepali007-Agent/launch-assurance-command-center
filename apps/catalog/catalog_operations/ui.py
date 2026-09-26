@@ -559,12 +559,12 @@ def _leadership_workspace(repo: CatalogRepository, connected=False) -> None:
     vendors = intelligence["vendor"]
     divisions = intelligence["division"]
     tabs = st.tabs([
-        "Executive Summary", "Catalog Health", "Vendor Intelligence",
+        "Dashboard", "Catalog Health", "Vendor Intelligence",
         "Division Performance", "Revenue & Customer Impact",
     ])
 
     with tabs[0]:
-        st.subheader("Executive Summary")
+        st.subheader("Dashboard")
         orchestration = intelligence["orchestration"]
         sync = orchestration["synchronization"]
         if sync["status"] == "VERIFIED":
@@ -828,9 +828,9 @@ def render_app() -> None:
     from workflow_connection import workflow
     testing=st.toggle('Standalone testing mode',value=False,help='Use an isolated direct upload to test Catalog rules; no shared requests are created.')
     if not testing:
-        from retail_workflow.stages import catalog as connected_catalog
-        import sys
-        connected_catalog(sys.modules[__name__]);return
+        from retail_workflow import stages
+        import sys,importlib
+        importlib.reload(stages).catalog(sys.modules[__name__]);return
     st.warning('Standalone test portfolio: approvals and receipts here do not authorize the connected workflow.')
     if st.session_state.get("ui_version") != "catalog-ops-6":
         st.session_state.pop("last_workflow", None)

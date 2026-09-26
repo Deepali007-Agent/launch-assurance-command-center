@@ -29,3 +29,5 @@ Thumbs.db
 quality/
 
 benchmark/coverage.json
+
+local_intake/

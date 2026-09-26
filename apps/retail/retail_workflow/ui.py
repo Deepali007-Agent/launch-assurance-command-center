@@ -15,9 +15,13 @@ def records(frame):
 def batch_selector(stage,allow_create=False):
     _definitions()
     store=WorkflowStore()
+    if st.button('Refresh available batches',key='refresh_batches_'+stage,help='Reload batches created by automatic intake or another workbench.'):
+        st.rerun()
     batches=store.batches();names={b['id']:b['name'] for b in batches}
     options=['']+list(names)
     if st.session_state.get('connected_batch') not in options:st.session_state.pop('connected_batch',None)
+    if len(names)==1 and not st.session_state.get('connected_batch'):
+        st.session_state['connected_batch']=next(iter(names))
     batch=st.selectbox('Shared workflow batch',options,format_func=lambda value:names.get(value,'Select a batch'),
                        key='connected_batch',help='Select the same batch in all workbenches to use one versioned request history.')
     if allow_create:
@@ -31,7 +35,7 @@ def batch_selector(stage,allow_create=False):
                         st.success('Batch created. Select it above to begin.');st.rerun()
                     except ValueError as exc:st.error(str(exc))
     if not batch:
-        st.info('Start and select a batch in Onboarding Intelligence. Select that same batch here to receive its records.')
+        st.info('Select an existing batch above to review its records. No re-upload is needed.' if batches else 'No shared batches yet. Submit a folder through automatic intake or create a batch in Onboarding.')
     return store,batch
 
 
@@ -112,11 +116,11 @@ def _frame(rows):
 def summary(store,batch,kind=None):
     if not batch:return
     rows=[r for r in store.board(batch) if not kind or r['kind']==kind]
-    columns=st.columns(4)
-    for col,label in zip(columns,['Ready for approval','Blocked','Approved','ERP acknowledged (simulated)']):
-        col.metric(label,sum(r['Status']==label for r in rows),help='Number of current request versions with this derived status.')
-        col.caption('Current requests; approval and simulated execution are separate.')
-    st.caption('Statuses are recalculated against current upstream versions. A completed historical receipt never clears a newer or blocked request.')
+    from .dashboard import evidence,source_status
+    checks=evidence(store,batch)
+    metrics=[('Current records',len(rows),'Current request versions in this stage.'),('Data checks clear',sum(source_status(r,checks)=='Clear' for r in rows),'Source rules pass; approval and execution are separate.'),('Approval eligible',sum(r['Approval eligible'] and not r['Approved'] for r in rows),'Ready for a human decision, not yet approved.'),('Execution eligible',sum(r['Execution eligible'] for r in rows),'All current execution requirements pass; execution is simulated.')]
+    for col,(label,value,definition) in zip(st.columns(4),metrics):col.metric(label,value,help=definition)
+    st.caption('Measures overlap: data clearance, approval eligibility and execution permission are different stages, not additive totals.')
 
 
 def actions(store,batch,kind=None,key='actions',compact=False):
@@ -144,7 +148,7 @@ def actions(store,batch,kind=None,key='actions',compact=False):
         if request_kind=='item':skus.update(entities)
         if request_kind=='vendor':skus.update(r['entity'] for r in all_rows if r['kind']=='item' and str(r['payload'].get('vendor_id')) in entities)
         skus.discard('')
-        owners={r['owner'] or 'Unassigned' for r in members}
+        owners={r['owner'] if r['team']==next_team and r['owner'] else 'Unassigned to this team' for r in members}
         owner=next(iter(owners)) if len(owners)==1 else 'Multiple owners'
         grouped.append({'Team / owner':next_team+' / '+owner,'SKUs':len(skus),
                         'PO lines':len(linked),'Due':min((r['due'] for r in members if r['due']),default='Not set'),
@@ -171,12 +175,15 @@ def actions(store,batch,kind=None,key='actions',compact=False):
         st.caption('Top 10 groups by blocker, deadline and upstream stage. Counts are distinct within each row and are not additive. Evidence contains every request and full finding.')
     elif not compact:st.success('No pending requests in this team filter.')
     if not filtered:return
+    from .clarity import download_register
+    download_register(store,batch,key+'_register')
     with st.expander('Assign, reassign or return a request'):
         by_id={r['id']:r for r in filtered}
         identifier=st.selectbox('Request to update',list(by_id),format_func=lambda i:by_id[i]['kind'].title()+' · '+by_id[i]['entity'],key=key+'_request',help='Choose the exact request whose ownership or deadline will change.')
         selected=by_id[identifier]
+        st.caption('Current assignment: '+selected['team']+' / '+(selected['owner'] or 'Unassigned')+'. Next required action: '+selected['Next team']+'. When changing teams, name an owner for that receiving team.')
         with st.form(key+'_assignment_'+identifier):
-            receive=st.selectbox('Receiving team',TEAMS,index=TEAMS.index(selected['Next team']) if selected['Next team'] in TEAMS else 0,help='The team expected to perform the next action.')
+            receive=st.selectbox('Receiving team',TEAMS,index=TEAMS.index(selected['team']) if selected['team'] in TEAMS else 0,help='The team expected to perform the next action.')
             owner=st.text_input('Named owner',value=selected['owner'],help='The individual responsible for the request.')
             due=st.text_input('Due date',value=selected['due'],placeholder='YYYY-MM-DD',help='Deadline for the assigned correction or approval.')
             status=st.selectbox('Work status',['Open','In progress','Waiting approval','Returned','On hold'],help='Reported work progress; it cannot override validation or approve execution.')
@@ -184,6 +191,8 @@ def actions(store,batch,kind=None,key='actions',compact=False):
             reason=st.text_input('Handoff reason / next step',help='Why this is being reassigned and what the receiving team must do.')
             if st.form_submit_button('Save ownership change'):
                 try:
+                    if receive!=selected['team'] and owner.strip()==selected['owner'].strip() and owner.strip():
+                        raise ValueError('When changing teams, enter the receiving team owner rather than retaining the previous owner automatically.')
                     store.assign(identifier,selected['etag'],receive,owner,due,status,actor,reason);st.rerun()
                 except ValueError as exc:st.error(str(exc))
 
@@ -209,7 +218,7 @@ def review(store,batch,kind=None,key='review'):
             except ValueError as exc:st.error(str(exc))
     with st.expander('Simulate ERP acknowledgement'):
         eligible={r['id']:r for r in rows if r['Execution eligible'] and not r['ERP receipt']}
-        st.caption('Sequence: approved vendor → vendor master acknowledgement → approved Catalog item → item setup acknowledgement → approved PO → PO acknowledgement. This is a local simulation only.')
+        st.caption('Sequence: approved vendor â†’ vendor master acknowledgement â†’ approved Catalog item â†’ item setup acknowledgement â†’ approved PO â†’ PO acknowledgement. This is a local simulation only.')
         all_selected=st.checkbox('Select all currently executable versions',key=key+'_all_sim',help='Only approved versions whose upstream prerequisites are satisfied can be included.')
         selected=list(eligible) if all_selected else st.multiselect('Versions to simulate',list(eligible),format_func=lambda i:eligible[i]['kind']+' · '+eligible[i]['entity'],key=key+'_sim_list',help='Choose approved records for a local simulated receipt.')
         actor=st.text_input('Simulation recorded by',key=key+'_sim_actor',help='The person recording this local integration test.')
@@ -241,24 +250,16 @@ def workspace(selected_batch=None):
     else:
         _definitions()
         store,batch=WorkflowStore(),selected_batch
-    st.caption('Onboarding → Catalog → Buying. One batch, versioned records, accountable handoffs. Earlier saved launch assessments are available in History.')
-    launch,action,evid,rev=st.tabs(['Launch decision','Actions','Evidence','Review & audit'])
+    st.caption('Onboarding â†’ Catalog â†’ Buying. One batch, versioned records, accountable handoffs. Earlier saved launch assessments are available in History.')
+    launch,action,evid,rev=st.tabs(['Dashboard','Actions','Evidence','Review & audit'])
     with launch:
         if batch:
-            name=next((r['name'] for r in store.batches() if r['id']==batch),batch)
-            st.subheader(name,help='The named uploaded batch assessed by all three workbenches.')
-            board=store.board(batch);pos=[r for r in board if r['kind']=='po']
-            if not pos:st.info('No PO requests yet. Complete Onboarding, receive items in Catalog, then upload the buying request.')
-            else:
-                ready=sum(r['Execution eligible'] for r in pos)
-                st.write(f"**{ready:,} of {len(pos):,} PO line requests can proceed to simulated execution.** Human approval and setup gates remain binding.")
-                blockers=pd.DataFrame([{'Team':r['Next team'],'Next action':r['Next action'],'PO lines':1} for r in pos if not r['Execution eligible']])
-                if not blockers.empty:
-                    grouped=blockers.groupby(['Team','Next action'],as_index=False)['PO lines'].sum().sort_values('PO lines',ascending=False)
-                    st.dataframe(grouped.head(3),hide_index=True,width='stretch')
-                    st.caption('Top blocking requirements and accountable teams. Full assignments are in Actions.')
-            from launch_assurance.uploaded_ui import render as render_logistics
-            render_logistics(store,batch)
+            import importlib
+            from . import dashboard
+            importlib.reload(dashboard).render(store,batch,'retail')
+            with st.expander('Shipment and inventory decisions',expanded=False):
+                from launch_assurance.uploaded_ui import render as render_logistics
+                render_logistics(store,batch)
     with action:actions(store,batch,key='parent_actions',compact=True)
     with evid:
         if batch:
@@ -286,7 +287,7 @@ def _definitions():
     definitions={
       'Onboarding Intelligence':'Registers vendors and mandatory item data before specialist Catalog assessment.',
       'CatalogIQ Pro':'Enriches and validates product content received from Onboarding.',
-      'Executive Summary':'Current outcomes and the operational steps that can proceed.',
+      'Dashboard':'Current outcomes and the operational steps that can proceed.',
       'Vendor Onboarding':'Vendor master data, compliance findings and Finance approval readiness.',
       'Item Onboarding':'Mandatory SKU setup fields and the handoff to Catalog.',
       'Actions & Approvals':'Assign corrections, record human decisions and simulate eligible downstream handoffs.',

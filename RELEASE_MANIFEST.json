@@ -14,11 +14,15 @@
     },
     {
       "path": ".gitignore",
-      "sha256": "6d8cf4419bde7cdd58757e2b9798a5fb6079da51ec2e6b0860a2f1e282af066b"
+      "sha256": "3ca53491e4fa3056e3e5273c8eec8464fa5aec1ab20da5d2190a9d0de37aa60f"
     },
     {
       "path": "ARCHITECTURE.md",
       "sha256": "401866bf7ef7fc2a04e59dc1f87c2ddf1825e5223f2e840588657fa1ed112a75"
+    },
+    {
+      "path": "AUTO_INTAKE.md",
+      "sha256": "61bba5778faf0170b57605597e31c2e374f9b6769c9f72ef76d1d9fc307f5f91"
     },
     {
       "path": "DEPLOYMENT.md",
@@ -30,7 +34,11 @@
     },
     {
       "path": "README.md",
-      "sha256": "8905194461b03dea34c1f76c27658f0977aabc35e50002e141645c8ba6238568"
+      "sha256": "f79af86add654402896e504d9923a7ab27036e628467e2afab773a695e48d69a"
+    },
+    {
+      "path": "RELEASE_NOTES.md",
+      "sha256": "e0b866bd8e3811752018f6b98b4f8fc774797b9aeb1173abcb54f8e753a773ab"
     },
     {
       "path": "USABILITY_STUDY.md",
@@ -126,7 +134,7 @@
     },
     {
       "path": "apps/catalog/catalog_operations/ui.py",
-      "sha256": "40e964c1d3dbdb977cf0fbd7e65e9e096e04628f6276c261c88a07a160b5f4bd"
+      "sha256": "7e0095f9db66312d00e3df8a60ade27bc6da80d816c193fd58d3d03e47d7dde3"
     },
     {
       "path": "apps/catalog/data/.gitkeep",
@@ -174,7 +182,7 @@
     },
     {
       "path": "apps/catalog/workflow_connection.py",
-      "sha256": "c2fb3dabaf407ed0789a791230ab29560abfee7080ee9392d589966ba8621f12"
+      "sha256": "39974d1ce7e1601076743365f11a874623b691ea50d63b4a17aa61aa61ef0d90"
     },
     {
       "path": "apps/onboarding/app.py",
@@ -230,7 +238,7 @@
     },
     {
       "path": "apps/onboarding/standardized_app.py",
-      "sha256": "81d40476c1c10265ac336b8f76609b4b0f4cfcbab34f7563909a3998f5b42fc2"
+      "sha256": "0f3b5874b111bffefdf3afff5b6e437f01bcb424402b90e13bddca886c12ff3a"
     },
     {
       "path": "apps/onboarding/tests/test_onboarding_intelligence.py",
@@ -246,7 +254,7 @@
     },
     {
       "path": "apps/onboarding/workflow_connection.py",
-      "sha256": "c2fb3dabaf407ed0789a791230ab29560abfee7080ee9392d589966ba8621f12"
+      "sha256": "39974d1ce7e1601076743365f11a874623b691ea50d63b4a17aa61aa61ef0d90"
     },
     {
       "path": "apps/po/agents/__init__.py",
@@ -266,7 +274,7 @@
     },
     {
       "path": "apps/po/app.py",
-      "sha256": "3242ae6134ae6c6d1a7dc5b7d26b13834e0184c47a28bb183a0db8a8992181f6"
+      "sha256": "36de50399130d5f2787526e754774d03039c529608ff8cdf6cce1e25514e8f46"
     },
     {
       "path": "apps/po/data/.gitkeep",
@@ -374,11 +382,11 @@
     },
     {
       "path": "apps/po/workflow_connection.py",
-      "sha256": "c2fb3dabaf407ed0789a791230ab29560abfee7080ee9392d589966ba8621f12"
+      "sha256": "39974d1ce7e1601076743365f11a874623b691ea50d63b4a17aa61aa61ef0d90"
     },
     {
       "path": "apps/retail/app.py",
-      "sha256": "782dbc3fd004d8fc1abe851c9a311c3d14e32f42d124969eab9b8d36ad3b8fb3"
+      "sha256": "290e9ecaed722171fb944972b4f49d26e2fad701bf7a0b6a2ee22fd90b9fbc3e"
     },
     {
       "path": "apps/retail/data/.gitkeep",
@@ -514,7 +522,7 @@
     },
     {
       "path": "apps/retail/portable_excel.py",
-      "sha256": "49037d5b990b3fb1fbbe5f30aaacc7082d1ac04e6724d92fc3de44a41899110c"
+      "sha256": "b54fea120627e3d248b788f052edcffef48ffb7f6ba5783b54e079404fe756ef"
     },
     {
       "path": "apps/retail/receiver_api.py",
@@ -525,8 +533,28 @@
       "sha256": "240401be7fa20b8b20f2b254001d0a5efc189aa7aaea22366fbcdb7d06cd2e69"
     },
     {
+      "path": "apps/retail/retail_workflow/auto_intake.py",
+      "sha256": "a5a1e4cd7d3827457c05e61b8c241d11c939029bdac307e5485460546b779486"
+    },
+    {
+      "path": "apps/retail/retail_workflow/auto_intake_ui.py",
+      "sha256": "db4fa91ee34efe324f6de59ef12c69cbe0e86a4ea307dd594ca5abe642bff586"
+    },
+    {
+      "path": "apps/retail/retail_workflow/clarity.py",
+      "sha256": "92080c693aef8f19807085fb172e124efcba9c4a06329ad92d84f2155427f2cb"
+    },
+    {
+      "path": "apps/retail/retail_workflow/dashboard.py",
+      "sha256": "0305255bda707f83ed6887f40722b7ff34c46f368190e6f6a1eee9aebd343ffe"
+    },
+    {
+      "path": "apps/retail/retail_workflow/delays.py",
+      "sha256": "4023f8ec5192401d9ce45f1dc416a8c4207fee57ea90c28cd075a70d73012178"
+    },
+    {
       "path": "apps/retail/retail_workflow/stages.py",
-      "sha256": "91ab77da9b2725427be2870a2ebac6c43eefd1a3c2c32992f3961db0d007061f"
+      "sha256": "2369a24f524f6dbbcc02bb0ec432e48d2c5f75228ddf6864e297b43f9da4b050"
     },
     {
       "path": "apps/retail/retail_workflow/store.py",
@@ -534,7 +562,7 @@
     },
     {
       "path": "apps/retail/retail_workflow/ui.py",
-      "sha256": "ae900455f78977a7da6f633002d84c7b00d35958283fbf262a351c5bba8131d8"
+      "sha256": "a7e0fecad852154e7b82ebce7e45f36b332ab9aa199f20699fe4083b8d833deb"
     },
     {
       "path": "apps/retail/tests/__init__.py",
@@ -543,6 +571,10 @@
     {
       "path": "apps/retail/tests/test_action_queue.py",
       "sha256": "b22ccc293c70ab556bf9a75629c84f24ed83a7e84ffb492b4aa6ef8b05bf753b"
+    },
+    {
+      "path": "apps/retail/tests/test_auto_intake.py",
+      "sha256": "020c0f74cd0609470f44cfb8eddb1d1a223ff2793e42bbe43587e8cb6acbe5f0"
     },
     {
       "path": "apps/retail/tests/test_certification.py",
@@ -557,8 +589,16 @@
       "sha256": "8a6e7f77257e236e0dc23163899e3e15b19250ad911650e67ba926293cf41635"
     },
     {
+      "path": "apps/retail/tests/test_dashboard.py",
+      "sha256": "c082dc91d10d64898426e1c7a1405718d7581a4f404f730a2b4dcec1106f4f1d"
+    },
+    {
       "path": "apps/retail/tests/test_decision_workflow.py",
       "sha256": "86be3ec4b0db3653c723d5ea070beae671469a38c9ac25560f3758e678ec8988"
+    },
+    {
+      "path": "apps/retail/tests/test_delays.py",
+      "sha256": "6b8929bb23f4f9ca22fbee2576d1596090d4d6368f951dcba1f70b5a21cc0e2e"
     },
     {
       "path": "apps/retail/tests/test_intake.py",
@@ -610,7 +650,7 @@
     },
     {
       "path": "benchmark/results.json",
-      "sha256": "581d5b3e2cb67563b3f6b28d8a8fab1bcd29bd7e356b22ebedbbf913f0d30df7"
+      "sha256": "3f8228086338d053b1d5657434577000a73e0e8ba71f8a376ff438d398d4be01"
     },
     {
       "path": "demo/corrected/catalog.csv",
@@ -658,7 +698,7 @@
     },
     {
       "path": "run.py",
-      "sha256": "826df52b18b1f113d0a4f78b62759392395fb80b8f18ed49480904a84a493395"
+      "sha256": "fe6e24aae2d421446fab2a53d368292f17b23932417167b65d0dcba121b5dc9a"
     },
     {
       "path": "scripts/benchmark_validation.py",
@@ -681,8 +721,16 @@
       "sha256": "469624b6502b113f8f54f08de1dffbe771ad2b5a1f73d023bccad93a9595f74b"
     },
     {
+      "path": "scripts/submit_intake.py",
+      "sha256": "a8406f8c95b5711a2cc6543d2adb56aec7e86ac7e326a709b9f22e54f85cf17b"
+    },
+    {
       "path": "scripts/test_all.py",
       "sha256": "8b25328e09dc37cd9c2700810515d83c201f17aa99306bcc4610681222e0145f"
+    },
+    {
+      "path": "scripts/watch_intake.py",
+      "sha256": "245dc51900db28bcf08f3bbc901b506658c34e40365d094b8975b79cc2fa6b4f"
     },
     {
       "path": "streamlit_app.py",
